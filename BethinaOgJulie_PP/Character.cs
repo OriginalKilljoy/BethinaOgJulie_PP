@@ -15,12 +15,12 @@ namespace BethinaOgJulie_PP
         public string Companion;
 
         //ctor
-        public Character(string name, string house, int year, List<string>Inventory)
+        public Character(string name, string house, int year, List<string>inventory)
         {
             Name = name;
             House = house;
             Year = year;
-            Inventory = new List<string>();
+            Inventory = inventory;
         }
 
         public void Introduction()
