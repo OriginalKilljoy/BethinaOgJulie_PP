@@ -10,13 +10,12 @@ List<string> objects = new List<string> { "boot", "pillow", "butterbeer", "quill
 Shop shop = new Shop();
 Magic magic = new Magic();
 
+
 Magic spell1 = new Magic("Wingardium Leviosa", "A feather floats gracefully in the air.");
-Magic spell2 = new Magic("Accio", $"A {GetRandomObject()} comes floating towards you!");
-Magic spell3 = new Magic("Alohomora", $"You unlock a treasure chest and find a {GetRandomObject()}!");
-Magic spell4 = new Magic("Expecto Patronum", $"Your {character1.Patronus} comes shooting out of your wand and protects you from evil!");
+Magic spell2 = new Magic("Accio", "A _ comes floating towards you!");
+Magic spell3 = new Magic("Alohomora", "You unlock a treasure chest and find a _!");
+Magic spell4 = new Magic("Expecto Patronum", "Your - comes shooting out of your wand and protects you from evil!");
 
-
-Random rand = new Random();
 
 ChooseCharacter();
 
@@ -61,8 +60,7 @@ void StartMenu(Character character)
             shop.Menu(character);
             break;
         case "2":
-            UseSpell(character);
-            // DO SOME MAGIC
+            ChooseSpell(character);
             break;
         case "3":
             Console.Clear();
@@ -87,16 +85,45 @@ string GetRandomObject()
     return randomItem;
 }
 
-void UseSpell(Character character)
+void ChooseSpell(Character character)
 {
-    Console.WriteLine("What spell would you like to cast?\n[ 1 ] Wingardium Leviousa");
-    var userInput = Console.ReadLine();
+    Console.Clear();
+    Console.WriteLine("Which spell do you want to cast?\n\nWingardium Leviosa\n\nAccio\n\nAlohamora\n\nExpecto Patronum\n\n[ 1 ] Go back");
+    var userInput = Console.ReadLine().ToLower();
     switch (userInput)
     {
+        case "wingardium leviosa":
+            UseSpell(character, spell1);
+            break;
+        case "accio":
+            
+            UseSpell(character, spell2);
+            break;
+        case "alohamora":
+            
+            UseSpell(character, spell3);
+            break;
+        case "expecto patronum":
+            UseSpell(character, spell4);
+            break;
         case "1":
-            Console.WriteLine($"{spell1.SpellName}!");
-            Thread.Sleep(1500);
-            Console.WriteLine($"{spell1.Effect}");
+            StartMenu(character);
+            break;
+        default:
+            Console.WriteLine("That is not a spell, check your spelling.");
+            Thread.Sleep(2000);
+            ChooseSpell(character);
             break;
     }
+}
+
+void UseSpell(Character character, Magic spell)
+{
+    Console.Clear();
+    Console.WriteLine($"{spell.SpellName}!");
+    Thread.Sleep(1500);
+    Console.WriteLine($"{spell.DoMagic(GetRandomObject(), character)}");
+    Thread.Sleep(2000);
+    Console.Clear();
+    StartMenu(character);
 }

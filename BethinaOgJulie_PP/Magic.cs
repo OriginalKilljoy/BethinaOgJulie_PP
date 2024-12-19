@@ -22,7 +22,27 @@ namespace BethinaOgJulie_PP
             
         }
 
-
+        public string DoMagic(string item, Character character)
+        {
+            string sentence = "";
+            for (int i = 0; i < Effect.Length; i++)
+            {
+                if (Effect[i] == '_')
+                {
+                    sentence += item;
+                }
+                else if (Effect[i] == '-')
+                {
+                    sentence += character.Patronus;
+                }
+                else
+                {
+                    sentence += Effect[i];
+                }
+         
+            }
+            return sentence;
+        }
 
     }
 }
