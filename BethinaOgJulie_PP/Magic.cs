@@ -11,5 +11,18 @@ namespace BethinaOgJulie_PP
         public string SpellName;
         public string Effect;
 
+        public Magic(string spellname, string effect)
+        {
+            SpellName = spellname;
+            Effect = effect;
+        }
+
+        public Magic()
+        {
+            
+        }
+
+
+
     }
 }

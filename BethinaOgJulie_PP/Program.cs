@@ -5,7 +5,18 @@ Console.WriteLine("Harry Potter Oppgave");
 var character1 = new Character("Bethina SM", "Hufflepuff", 7, new List<string> { "1 x Health Potion", "A book - History of Magic" }, "Otter");
 var character2 = new Character("Julie MV", "Ravenclaw", 7, new List<string> { "1 x Health Potion", "A small pouch of Gobstones" }, "Marsh Harrier");
 
+List<string> objects = new List<string> { "boot", "pillow", "butterbeer", "quill", "really heavy book" };
+
 Shop shop = new Shop();
+Magic magic = new Magic();
+
+Magic spell1 = new Magic("Wingardium Leviosa", "A feather floats gracefully in the air.");
+Magic spell2 = new Magic("Accio", $"A {GetRandomObject()} comes floating towards you!");
+Magic spell3 = new Magic("Alohomora", $"You unlock a treasure chest and find a {GetRandomObject()}!");
+Magic spell4 = new Magic("Expecto Patronum", $"Your {character1.Patronus} comes shooting out of your wand and protects you from evil!");
+
+
+Random rand = new Random();
 
 ChooseCharacter();
 
@@ -50,6 +61,7 @@ void StartMenu(Character character)
             shop.Menu(character);
             break;
         case "2":
+            UseSpell(character);
             // DO SOME MAGIC
             break;
         case "3":
@@ -64,5 +76,27 @@ void StartMenu(Character character)
             break;
 
 
+    }
+}
+
+string GetRandomObject()
+{
+    Random rand = new Random();
+    int index = rand.Next(0, objects.Count);
+    string randomItem = objects[index];
+    return randomItem;
+}
+
+void UseSpell(Character character)
+{
+    Console.WriteLine("What spell would you like to cast?\n[ 1 ] Wingardium Leviousa");
+    var userInput = Console.ReadLine();
+    switch (userInput)
+    {
+        case "1":
+            Console.WriteLine($"{spell1.SpellName}!");
+            Thread.Sleep(1500);
+            Console.WriteLine($"{spell1.Effect}");
+            break;
     }
 }
